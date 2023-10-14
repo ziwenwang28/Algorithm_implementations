@@ -2,22 +2,24 @@ import math
 import itertools
 import time
 from collections import namedtuple
-import math
-from collections import namedtuple
 import random
 
+# Define a named tuple 'Point' to represent 2D points with 'x' and 'y' coordinates
 Point = namedtuple("Point", ['x', 'y'])
 
+# Function to calculate the Euclidean distance between two points
 def length(point1, point2):
     return math.sqrt((point1.x - point2.x)**2 + (point1.y - point2.y)**2)
 
+# Class to solve the Traveling Salesman Problem
 class TspSolver:
     def __init__(self, points):
         self.points = points
         self.COMPARISON_THRESHOLD = 10 ** -6
-        self.tour = list(range(len(points))) + [0]
-        self.objective = self.calculate_tour_length()
+        self.tour = list(range(len(points))) + [0]  # Initialize the tour with a starting point
+        self.objective = self.calculate_tour_length()  # Compute the initial objective value
 
+    # Convert the TSP solver object to a string for output
     def __str__(self):
         length = self.calculate_tour_length()
         optimal = 0
@@ -27,21 +29,26 @@ class TspSolver:
         output_str += ' '.join(map(str, self.tour[:-1]))
         return output_str
 
+    # Calculate the Euclidean distance between two points
     @staticmethod
     def calculate_distance(point1, point2):
         return math.sqrt((point1.x - point2.x) ** 2 + (point1.y - point2.y) ** 2)
 
+    # Check if the current tour is a valid solution
     def is_valid_solution(self):
         return len(set(self.tour[:-1])) == len(self.points) == len(self.tour[:-1])
 
+    # Calculate the length of an edge between two vertices
     def edge_length(self, vertex1, vertex2):
         point1 = self.points[vertex1]
         point2 = self.points[vertex2]
         return self.calculate_distance(point1, point2)
 
+    # Calculate the total length of the tour
     def calculate_tour_length(self):
         return sum(self.edge_length(v1, v2) for v1, v2 in zip(self.tour[:-1], self.tour[1:]))
 
+    # Greedy heuristic to construct an initial tour
     def greedy(self):
         self.tour = [0]  # Start with the first point
         remaining_points = set(self.tour[1:-1])  # Remaining points to visit
@@ -59,6 +66,7 @@ class TspSolver:
         self.objective = self.calculate_tour_length()  # Update the objective value
         return self.__str__()
 
+    # Perform a 2-opt swap between two positions in the tour
     def swap(self, start, end):
         original_tour = self.tour
         new_tour = (
@@ -82,6 +90,7 @@ class TspSolver:
         else:
             return False  # No improvement
 
+    # Solve the TSP using 2-opt local search
     def solve(self, t_threshold=None):
         start_time = time.time()
         while True:
@@ -96,6 +105,7 @@ class TspSolver:
                 break
         return self.__str__()
 
+# Function to solve the TSP based on the input data
 def solve_it(input_data):
     # Parse the input
     lines = input_data.split('\n')
@@ -117,9 +127,11 @@ def solve_it(input_data):
         tour = list(range(nodeCount))
         random.shuffle(tour)
 
+        # Function to calculate the tour length
         def calculate_tour_length(tour):
             return sum(length(points[tour[i]], points[tour[i + 1]]) for i in range(nodeCount - 1)) + length(points[tour[-1]], points[tour[0]])
 
+        # Function to perform a 2-opt swap in a tour
         def two_opt_swap(tour, i, j):
             new_tour = tour[:i] + tour[i:j+1][::-1] + tour[j+1:]
             return new_tour
