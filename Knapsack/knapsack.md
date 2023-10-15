@@ -27,20 +27,9 @@ The input is structured as follows:
 - The first line contains two integers: `n` (number of items) and `K` (knapsack capacity).
 - The subsequent lines provide data for each item, with each line containing two integers: the item's value `vi` followed by its weight `wi`.
 
-**Example:**
-4 11
-8 4
-10 5
-15 8
-4 3
-
 
 ## Output Format
 
 The output is presented in two lines:
 - The first line contains two values: `obj` (total objective value) and `opt` (optimality indicator, 1 for optimal, 0 for not).
 - The second line consists of a list of binary values `xi`, each corresponding to an item, indicating whether it is selected (1) or not (0).
-
-**Example:**
-19 0
-0 0 1 1
