@@ -73,3 +73,14 @@ Dynamic programming and a greedy approach.
 2. **Advanced Heuristics:** Investigate advanced heuristics and metaheuristic algorithms to improve the accuracy of the greedy approach for larger instances.
 
 3. **Handle Edge Cases:** Address edge cases and unusual input scenarios to enhance code robustness.
+
+## Usage
+
+1. Clone this repository to your local machine.
+2. Execute the `solve_it` function by providing an input file as an argument.
+3. The solution will be printed to the standard output.
+
+For example:
+
+```shell
+python solver.py ./data/(dataset of choice, for example, ks_200_0)
