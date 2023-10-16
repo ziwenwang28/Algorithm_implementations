@@ -1,4 +1,3 @@
-# python3
 from collections import defaultdict
 from heapq import heappop, heappush
 class Edge:
