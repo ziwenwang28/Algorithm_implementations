@@ -64,5 +64,3 @@ For the input data processing, I've included the `read_data` function. It is res
 ## Main Section
 
 In the main section of the code, the input data is read, the flow graph is constructed, and the maximum flow from the source vertex (0) to the target vertex (size of the graph - 1) is calculated.
-
-This README provides an overview of the implementation, highlighting key components and the use of the Ford-Fulkerson algorithm to find the maximum flow in a flow network.
